@@ -1,0 +1,241 @@
+* {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+html {
+    width:100%;
+    height:100%;
+}
+body {
+    width:100%;
+    height:100%;
+
+    background: #ddd;
+    font: normal 13px Arial;
+    overflow:hidden;
+}
+
+#pageHeader {
+    width:100%;
+    height:40px;
+    padding:2px 10px 4px 10px;
+
+    border-bottom:1px black solid;
+    box-sizing: border-box;
+}
+    #description {
+        display:block;
+        float:left;
+        height:34px;
+
+        line-height:17px;
+    }
+
+    #checkYearPrice, #noCheckdongne {
+        display:block;
+        float:right;
+        width:34px;
+        height:34px;
+        margin:0 5px 0 20px;
+        cursor:pointer;
+        user-select: none;
+        box-sizing: border-box;
+    }
+        #checkYearPrice:disabled, #noCheckdongne:disabled {
+            cursor:not-allowed;
+        }
+    #checkYearPrice_desc, #noCheckdongne_desc {
+        display:block;
+        float:right;
+
+        color:gray;
+        font-size:20px;
+        line-height:36px;
+        user-select: none;
+    }
+            #noCheckdongne_desc {
+                font-size:14px;
+                line-height:18px;
+            }
+        #checkYearPrice_desc.active, #noCheckdongne_desc.active {
+            color:black;
+            cursor:pointer;
+        }
+
+    #writeExcel {
+        display:block;
+        float:right;
+        width:100px;
+        height:34px;
+        margin-left:20px;
+        padding:2px 5px;
+        box-sizing: border-box;
+
+        font-weight:bold;
+    }
+
+    /* 버튼 CSS */
+    .button-4 {
+        appearance: none;
+        background-color: #2ea44f;
+        border: 1px solid rgba(27, 31, 35, .15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-weight: 500;
+        list-style: none;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        cursor:pointer;
+    }
+
+    .button-4:hover {
+        background-color: #2c974b;
+        text-decoration: none;
+        transition-duration: 0.1s;
+    }
+
+    .button-4:disabled {
+        background-color: #94d3a2;
+        border-color: rgba(27, 31, 35, .1);
+        opacity:0.2;
+        color: rgba(255, 255, 255, .8);
+        cursor:not-allowed;
+    }
+
+    .button-4:active:not(:disabled) {
+        background-color: #298e46;
+        box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+        transition: none 0s;
+    }
+
+    .button-4:focus {
+        outline: 1px transparent;
+    }
+
+    .button-4:before {
+        display: none;
+    }
+
+    .button-4:-webkit-details-marker {
+        display: none;
+    }
+
+.pageBody {
+    width:100%;
+    height:calc(100% - 40px);
+    overflow-x:hidden;
+    overflow-y:scroll;
+    box-sizing: border-box;
+}
+    #pageBody2 {
+        display:none;
+        padding:10px;
+        font-size:30px;
+    }
+
+/*업로드 존*/
+#dropZone {
+    display: flex;
+        justify-content: center;
+        flex-direction: column;
+    background: rgba(0,0,0,0.7);
+    position: fixed;
+        left: 0;top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0.7;
+    visibility: hidden;
+
+    color:white;
+    font-size:4vw;
+    text-align:center;
+}
+    #dropZone.show {
+        visibility: visible;
+    }
+
+/*데이터 테이블 관리*/
+#dataTable {
+    /*width:100%;*/
+    margin-bottom:200px;
+    background:white;
+    border:1px black solid;
+        border-top:0;
+    border-collapse: separate; /* Don't collapse */
+    border-spacing: 0;
+
+    text-align:center;
+}
+        #dataTable.hidden {
+            display:none;
+        }
+    #dataTable th {
+        position: sticky;
+        top: 0; /* Don't forget this, required for the stickiness */
+        border-top:0;
+        border-left: 1px solid #444444;
+    }
+    #dataTable td {
+        padding:2px 10px;
+        border-top: 1px solid #444444;
+        border-left: 1px solid #444444;
+    }
+    #dataTable th.header {
+        position : sticky;
+        z-index: 15;
+        background:#ffff00;
+
+        font-weight: bold;
+    }
+    #dataTable .title {
+        max-width:800px;
+        /*white-space: nowrap;*/
+    }
+    #dataTable .year_price {
+        padding:0;
+        /*font-size:12px;*/
+        line-height:100%;
+        box-sizing: border-box;
+    }
+        #dataTable .year_price hr {
+            border-bottom:1px black solid;
+        }
+    #dataTable td.body.title {
+        text-align:left;
+    }
+    #dataTable td.user_changed {
+        border-top:4px #000000 solid;
+    }
+    #dataTable td.month_changed {
+        border-top:4px #FF0000 solid;
+    }
+    #dataTable td.month_passed {
+        opacity:0.3;
+    }
+    #dataTable td.falsed {
+        background:#ffcc6e;
+        font-weight: bold;
+    }
+    #dataTable td.whyFalsed {
+        background:#7e067e;
+        color:#FFFFFF;
+        font-weight: bold;
+    }
+    #dataTable td.processed {
+        background:#32de84;
+        font-weight: bold;
+    }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>비치희망 초과중복 조회</title>
+        <link rel="stylesheet" media="all" href="./files/BCJ/BCJ_style.css">
+
+	</head>
+	<body>
+        <!-- 출력 부분 -->
+        <div id="pageHeader">
+            <p id="description">
+                <b>파일 올리기</b> : 모든 엑셀 파일들을 이 화면에 드래그하세요 (파일명 = 도서관)
+                <br>
+                <b style='color:#ff8100;-webkit-text-stroke: 1px rgba(0,0,0,0.1);'>주황색</b> : 검토 대상 / <b style='color:#7e067e;'>보라색</b> : 검토 사유 / <b style='color:green;'>녹색</b> : 처리중 or 소장중 자료
+            </p>
+
+            <button id="writeExcel" class="button-4" role="button" disabled>엑셀 출력</button>
+            <label id="checkYearPrice_desc" for="checkYearPrice">연도/가격 검토</label>
+            <input id="checkYearPrice" type="checkbox" disabled>
+            <label id="noCheckdongne_desc" for="noCheckdongne">파일명에 "동네"가 포함된 엑셀은<br>초과 신청 검토 대상에서 제외</label>
+            <input id="noCheckdongne" type="checkbox" checked disabled>
+        </div>
+
+        <div id="pageBody1" class="pageBody">
+            <table id="dataTable" class="hidden"></table>
+        </div>
+        <div id="pageBody2" class="pageBody">
+        </div>
+
+        <!-- 팝업 부분 -->
+        <div id="dropZone">여기에 엑셀 파일들을 올리세요</div>
+    </body>
+
+    <!-- excel 관련 -->
+    <script type="text/javascript" src="./files/xlsx.bundle.js"></script>
+    <script type="text/javascript" src="./files/FileSaver.min.js"></script>
+    <script type="text/javascript" src="./files/excelTools.js"></script>
+    <!-- 스크립트 -->
+    <script type="text/javascript" src="./files/BCJ/BCJ_script.js"></script>
+</html>

@@ -1,0 +1,205 @@
+* {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+html {
+    width:100%;
+    height:100%;
+}
+body {
+    width:100%;
+    height:100%;
+ 
+    background: #ddd;
+    font: normal 13px Arial;
+    overflow:hidden;
+}
+
+/*업로드 존, 업로드 불가 존*/
+#dropZone {
+    display: flex;
+        justify-content: center;
+        flex-direction: column;
+    position: fixed;
+        left: 0;top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0.7;
+    visibility: hidden;
+
+    color:white;
+    font-size:4vw;
+    font-weight:bold;
+    text-align:center;
+}
+    #dropZone.show1 {
+        visibility: visible;
+        background: rgba(0,0,0,0.7);
+    }
+    #dropZone.show2 {
+        visibility: visible;
+        background: rgb(255,116,0);
+    }
+
+/*안내문*/
+.pageDescription {
+    width:100%;
+    height:35px;
+    padding:10px 10px 4px 10px;
+    overflow-x:hidden;
+
+    background: #ddd;
+    box-sizing: border-box;
+
+    font-size:16px;
+    line-height:19px;
+}
+
+/*입력창*/
+.pageInput {
+    float:left;
+    width:50%;
+    height:calc(100% - 40px);
+    box-sizing: border-box;
+}
+    #inputArea {
+        display:block;
+        width:100%;
+        height:calc(100% - 50px);
+        padding:5px;
+        overflow-y:scroll;
+        resize:none;
+
+        border:1px black solid;
+        box-sizing: border-box;
+
+        font: normal 16px Arial;
+    }
+
+    #clearInput {
+        display:block;
+        margin-top:10px;
+        width:100%;
+        height:40px;
+
+        font-size:20px;
+    }
+    
+    /* 버튼 CSS */
+    .button-5 {
+        align-items: center;
+        background-clip: padding-box;
+        background-color: #fa6400;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 600;
+        justify-content: center;
+        line-height: 1.25;
+        position: relative;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: baseline;
+    }
+
+    .button-5:hover,
+    .button-5:focus {
+        background-color: #fb8332;
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+
+    .button-5:active {
+        background-color: #c85000;
+        box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    }
+
+/*버튼창*/
+.pageButton {
+    float:right;
+    width:50%;
+    height:calc(100% - 70px);
+    padding:10px;
+
+    border-top:1px black solid;
+    box-sizing:border-box;
+}
+    #bookNumDesc {
+        margin-bottom:10px;
+        font-size:20px;
+
+        font-weight: bold;
+    }
+    #bookNum {
+        padding:2px 5px;
+
+        background:white;
+        border: 1px gray solid;
+
+        font-weight: bold;
+    }
+
+    .pageButton hr {
+        margin-bottom:10px;
+        
+        border-top:1px black solid;
+    }
+
+    /* 버튼 CSS */
+    .searchAladin {
+        display:block;
+        width:100%;
+        height:100px;
+        margin-bottom:30px;
+
+        font-size:30px;
+        font-weight:bold;
+        line-height:40px;
+    }
+
+    #searchAladinUp {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" transform="rotate(180)"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" transform="rotate(180)"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>');
+    }
+    #searchAladinDown {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>');
+    }
+
+    .button-1 {
+        background-color: #EA4C89;
+        background-size: 50px;
+        background-repeat: no-repeat;
+        background-position: center left 10px, center right 10px;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        list-style: none;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .button-1:hover {
+        background-color: #F082AC;
+    }
+    .button-1:active {
+        background-color: rgb(243, 170, 198);
+    }

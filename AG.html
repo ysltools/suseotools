@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>알라딘 다중 검색기</title>
+        <link rel="stylesheet" media="all" href="./files/AG/AG_style.css">
+
+	</head>
+	<body>
+        <!-- 메인창 -->
+        <div class="pageDescription">
+            <b style="font-size:20px;">알라딘 다중 검색기 : 좌측에 ISBN 또는 제목 등을 여러 줄 입력한 뒤, 우측의 검색 버튼을 누르세요</b>
+        </div>
+        <div class="pageInput">
+            <textarea id="inputArea" autofocus spellcheck="false" placeholder="이곳에 ISBN 또는 제목 등을 입력하세요.&#10;• 줄바꿈(⏎)으로 도서 구분 (ISBN 2줄 + 제목 1줄 = 3권 검색)&#10;• 메모장/엑셀 내용을 복사해서 붙여넣기해도 됩니다.&#10;• 메모장 파일(.txt)을 드래그해서 입력할 수도 있습니다.&#10;  (파일 입력 시 기존 입력값은 사라집니다)"></textarea>
+            <button id="clearInput" class="clearInput button-5" role="button">⟳ 입력값 초기화</button>
+        </div>
+        <div class="pageButton">
+            <div id="bookNumDesc"><span id="bookNum">0</span>권 검색 예정</div>
+            <hr>
+            <button id="searchAladinUp" class="searchAladin button-1" role="button">알라딘 검색<br>(목록 위에서 아래로)</button>
+            <br>
+            <button id="searchAladinDown" class="searchAladin button-1" role="button">알라딘 검색<br>(목록 아래에서 위로)</button>
+        </div>
+
+        <!-- 파일 드래그드롭 입력 -->
+        <div id="dropZone"></div>
+    </body>
+
+    <!-- excel 관련 -->
+    <script type="text/javascript" src="./files/xlsx.bundle.js"></script>
+    <script type="text/javascript" src="./files/FileSaver.min.js"></script>
+    <script type="text/javascript" src="./files/excelTools.js"></script>
+    <!-- 스크립트 -->
+    <script type="text/javascript" src="./files/AG/AG_script.js"></script>
+</html>

@@ -1,0 +1,739 @@
+* {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+html {
+    width:100%;
+    height:100%;
+}
+body {
+    width:100%;
+    height:100%;
+
+    background: #ddd;
+    font: normal 13px Arial;
+    overflow:hidden;
+}
+
+/*업로드 존, 업로드 불가 존*/
+#dropZone {
+    display: flex;
+        justify-content: center;
+        flex-direction: column;
+    position: fixed;
+        left: 0;top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0.7;
+    visibility: hidden;
+
+    color:white;
+    font-size:4vw;
+    font-weight:bold;
+    text-align:center;
+}
+    #dropZone.show1 {
+        visibility: visible;
+        background: rgba(0,0,0,0.7);
+    }
+    #dropZone.show2 {
+        visibility: visible;
+        background: rgb(255,116,0);
+    }
+
+.page {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+    #page1 {display:block;}
+    #page2 {display:none;}
+    #page3 {display:none;}
+    #page4 {display:none;}
+    #page5 {display:none;}
+    #page6 {display:none;}
+
+/*헤더*/
+.pageHeader {
+    width:100%;
+    height:50px;
+    padding:12px 10px 4px 10px;
+
+    background: #ddd;
+    border-bottom:1px black solid;
+    box-sizing: border-box;
+}
+    /*헤더 버튼 1*/
+    .goPrevious {
+        display:block;
+        float:left;
+        width:140px;
+        height:100%;
+        margin-right:10px;
+
+        font-size:20px;
+    }
+        .button-14 {
+            background: yellow;
+            border-color: #adb1b8 #a2a6ac #8d9096;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 3px;
+            box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+            box-sizing: border-box;
+            color: #0f1111;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Amazon Ember",Arial,sans-serif;
+            outline: 0;
+            padding: 0 11px;
+            text-align: center;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+        }
+            .button-14:disabled {
+                cursor: default;
+                opacity: .3;
+            }
+            .button-14:enabled:hover {
+                border-color: #a2a6ac #979aa1 #82858a;
+                box-shadow: rgba(228, 121, 17, 0.4) 0 0 9px 6px;
+            }
+            .button-14:enabled:active {
+                border-bottom-color: #a2a6ac;
+                box-shadow: rgba(228, 121, 17, 0.8) 0 0 9px 6px;
+            }
+    /*현재 단계*/
+    .currentStep {
+        display:block;
+        float:left;
+        width:300px;
+        height:100%;
+        user-select: none;
+
+        border:1px gray solid;
+        box-sizing: border-box;
+
+        color:black;
+        font-size:20px;
+        text-align: center;
+    }
+    /*헤더 버튼 2*/
+    .goNext {
+        display:block;
+        float:right;
+        width:200px;
+        height:100%;
+
+        font-size:20px;
+    }
+        .button-15 {
+            background-image: linear-gradient(#42A1EC, #0070C9);
+            border: 1px solid #0077CC;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            direction: ltr;
+            display: block;
+            font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 400;
+            letter-spacing: -.022em;
+            line-height: 1.47059;
+            min-width: 30px;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+        }
+        .button-15:disabled {
+            cursor: default;
+            opacity: .3;
+            user-select: none;
+        }
+        .button-15:enabled:hover {
+            background-image: linear-gradient(#51A9EE, #147BCD);
+            border-color: #1482D0;
+            box-shadow: rgba(228, 121, 17, 0.4) 0 0 9px 6px;
+            text-decoration: none;
+        }
+        .button-15:enabled:active {
+            background-image: linear-gradient(#3D94D9, #0067B9);
+            border-color: #006DBC;
+            box-shadow: rgba(228, 121, 17, 0.8) 0 0 9px 6px;
+            outline: none;
+        }
+
+/*안내문*/
+.pageDescription {
+    width:100%;
+    height:70px;
+    padding:5px 10px 4px 10px;
+    overflow-x:hidden;
+
+    background: #ddd;
+    border-bottom:1px black solid;
+    box-sizing: border-box;
+
+    font-size:16px;
+    line-height:19px;
+}
+    .pageDescription b {
+        display:inline-flex;
+        height:18px;
+    }
+    .pageDescription b.black {
+        background:black;
+        color:white;
+    }
+    .pageDescription b.red {
+        background:red;
+        color:white;
+    }
+    .pageDescription b.blue {
+        background:#0070C9;
+        color:white;
+    }
+    .pageDescription b.green {
+        background:#217346;
+        color:white;
+    }
+    .pageDescription b.brown {
+        background:brown;
+        color:white;
+    }
+
+/*바디*/
+.pageBody {
+    width:100%;
+    height:calc(100% - 170px);
+    overflow-y:scroll;
+
+    background:white;
+}
+
+/*1단계 바디*/
+#pageBody1 {
+    padding:10px;
+    box-sizing: border-box;
+}
+    #pageBody1 p {
+        display: block;
+        margin-bottom:5px;
+
+        font-size:20px;
+        font-weight: bold;
+        line-height: 130%;
+    }
+    #pageBody1 .checkExcelInput {
+        display: block;
+        width:100%;
+        min-height:20px;
+        padding:2px 2px 0px 2px;
+        margin-bottom:5px;
+
+        border:1px gray solid;
+        box-sizing: border-box;
+    }
+        #pageBody1 .checkExcelInput .checkExcelInputEl {
+            display: inline-block;
+            width:auto;
+            height:100%;
+            padding:2px 10px;
+            margin-right:2px;
+            margin-bottom:2px;
+
+            background:rgb(196,196,196);
+            box-sizing: border-box;
+
+            color:gray;
+            line-height:16px;
+        }
+            #pageBody1 .checkExcelInput .checkExcelInputEl_desc {
+                display: inline-block;
+                width:auto;
+                height:100%;
+                padding:2px 5px 2px;
+                margin-right:2px;
+                margin-bottom:2px;
+
+                box-sizing: border-box;
+
+                color:black;
+                font-weight: bold;
+                line-height:16px;
+            }
+            #pageBody1 .checkExcelInput .checkExcelInputEl.yes {
+                background:#217346;
+                color:white;
+            }
+            #pageBody1 .checkExcelInput .checkExcelInputEl.no {
+                background:#FF5F1F;
+                color:white;
+            }
+            #pageBody1 .checkExcelInput .checkExcelInputEl_번호,
+            #pageBody1 .checkExcelInput .checkExcelInputEl_구분,
+            #pageBody1 .checkExcelInput .checkExcelInputEl_검토 {
+                display:none;
+            }
+    #pageBody1 .delete {
+        clear:both;
+        float:left;
+        width:50px;
+        height:50px;
+        margin-right:10px;
+        margin-bottom:30px;
+
+        border:1px black solid;
+        box-sizing: border-box;
+
+        font-size:35px;
+        color:red;
+        text-align: center;
+        line-height:50px;
+        user-select: none;
+        cursor:pointer;
+    }
+        #pageBody1 .delete:hover{
+            background:red;
+            border:0;
+
+            color:white
+        }
+        #pageBody1 .delete:active{
+            background:white;
+            border:1px black solid;
+
+            color:red
+        }
+    #pageBody1 .upload {
+        float:left;
+        width:calc(100% - 60px);
+        height:50px;
+        margin-bottom:30px;
+        padding:10px 20px;
+
+        border:1px black solid;
+        box-sizing: border-box;
+
+        font-size:25px;
+        line-height:30px;
+    }
+        #pageBody1 .upload.uploaded {
+            background:#17B169;
+            border:0;
+
+            color:white;
+            font-weight: bold;
+        }
+
+/*2단계 ~ 3단계 바디*/
+#noISBNDuplicate {
+    display:none;
+    margin:20px;
+
+    font-size:20px;
+    font-weight:bold;
+}
+
+/*4단계 ~ 5단계 바디*/
+#page4, #page5 {
+    position:absolute;
+        left:0;top:0;
+        z-index:10;
+    width:100%;
+    height:100%;
+    overflow-y:scroll;
+    visibility:hidden;
+
+    background-color: white;
+}
+
+/*6단계 바디*/
+#page6 {
+    position:absolute;
+        left:0;top:0;
+        z-index:20;
+}
+#pageBody6 {
+    overflow: hidden;
+    padding:10px;
+    box-sizing: border-box;
+}
+    #page6 p {
+        display: block;
+
+        font-size:20px;
+        font-weight: bold;
+        line-height: 130%;
+    }
+
+    #page6 .writeExcel, #page6 .searchAladin, #page6 .searchKlas {
+        float:left;
+        width:48%;
+        max-width:450px;
+        height:50px;
+        margin:0 2% 15px 0%;
+        padding:6px 0;
+
+        font-size:22px;
+        font-weight:bold;
+    }
+
+    #page6 button .desc {
+        font-size:16px;
+    }
+
+    #page6 .clearFloat {
+        clear:both;
+    }
+
+    #page6 hr {
+        margin-bottom: 10px;
+        border:1px black solid;
+    }
+
+    #pageBody6_data {
+        width:100%;
+        height:calc(100% - 390px);
+        overflow-y:scroll;
+    
+        background:#CCCCCC;
+        border-top: 1px black solid;
+        border-bottom: 1px black solid;
+        box-sizing: border-box;
+    }
+
+    /* 최종 엑셀 출력 버튼 CSS */
+    .button-4 {
+        appearance: none;
+        background-color: #2ea44f;
+        border: 1px solid rgba(27, 31, 35, .15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-weight: 500;
+        list-style: none;
+        position: relative;
+        transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        word-wrap: break-word;
+        cursor:pointer;
+    }
+        .button-4.downloaded {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50"><path style="fill:rgb(255,255,255)" d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50"><path style="fill:rgb(255,255,255)" d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path></svg>');
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-position: center left 10px, center right 10px;
+        }
+
+    .button-4:hover {
+        background-color: #2c974b;
+        text-decoration: none;
+        transition-duration: 0.1s;
+    }
+
+    .button-4:disabled {
+        background-color: #94d3a2;
+        border-color: rgba(27, 31, 35, .1);
+        opacity:0.2;
+        color: rgba(255, 255, 255, .8);
+        cursor:not-allowed;
+    }
+
+    .button-4:active:not(:disabled) {
+        background-color: #298e46;
+        box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+        transition: none 0s;
+    }
+
+    .button-4:focus {
+        outline: 1px transparent;
+    }
+
+    .button-4:before {
+        display: none;
+    }
+
+    .button-4:-webkit-details-marker {
+        display: none;
+    }
+    
+    /* 알라딘 버튼, K.LAS 버튼 CSS */
+    #searchAladinUp, #searchKlasUp {        
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" transform="rotate(180)"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" transform="rotate(180)"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>');
+    }
+    #searchAladinDown, #searchKlasDown {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>'), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path style="fill:rgb(255,255,255)" d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/></svg>');
+    }
+    .button-1 {
+        background-color: #EA4C89;
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center left 10px, center right 10px;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .button-1:hover,
+    .button-1:focus {
+        background-color: #F082AC;
+    }
+
+    .button-2 {
+        background-color: #065dd8;
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center left 10px, center right 10px;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .button-2:hover,
+    .button-2:focus {
+        background-color: #0a6bff;
+    }
+
+
+/*바닥*/
+.pageBottom {
+    width:100%;
+    height:50px;
+    padding:4px 10px 4px 10px;
+
+    background: #ddd;
+    border-top:1px black solid;
+    box-sizing: border-box;
+}
+    #exchangeBD {
+        display:block;
+        float:right;
+        width:400px;
+        height:100%;
+
+        box-sizing: border-box;
+
+        font-size:25px;
+    }
+
+    .restoreTable {
+        display:block;
+        float:right;
+        width:400px;
+        height:100%;
+        margin-left:30px;
+
+        font-size:25px;
+    }
+        .button-41 {
+            background-image: linear-gradient(-180deg, #00D775, #009250);
+            border: 1px solid #a74402;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            direction: ltr;
+            display: block;
+            font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-weight: 400;
+            letter-spacing: -.022em;
+            line-height: 1.47059;
+            min-width: 30px;
+            text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+        }
+        .button-41:enabled:hover {
+            background: #00bd68;
+            text-decoration: none;
+        }
+        .button-41:enabled:active {
+            background: #00bd68;
+            box-shadow: rgba(228, 121, 17, 0.8) 0 0 9px 6px;
+            outline: none;
+        }
+
+    .currentDelete {
+        display:block;
+        float:right;
+        width:250px;
+        height:100%;
+        user-select: none;
+
+        border:1px gray solid;
+        box-sizing: border-box;
+
+        color:black;
+        font-size:20px;
+        text-align: center;
+    }
+
+/*테이블 출력*/
+.dataTable {
+    /*width:100%;*/
+    background:white;
+    border:1px black solid;
+        border-top:0;
+    border-collapse: separate; /* Don't collapse */
+    border-spacing: 0;
+
+    font-size:12px;
+    text-align:center;
+}
+        .dataTable.hidden {
+            display:none;
+        }
+    .dataTable th {
+        position: sticky;
+        top: 0; /* Don't forget this, required for the stickiness */
+        padding:2px 5px;
+
+        border-top:0;
+        border-left: 1px solid #444444;
+    }
+    .dataTable td {
+        height:30px;
+        padding:2px 2px;
+        border-top: 1px solid #444444;
+        border-left: 1px solid #444444;
+
+        font-weight:bold;
+    }
+    .dataTable th.header {
+        position : sticky;
+        z-index: 15;
+        background:#ffff00;
+        pointer-events: none;
+
+        font-weight: bold;
+    }
+        .dataTable .dataTable_번호, .dataTable .dataTable_구분, .dataTable .dataTable_검토 {
+            min-width:30px;
+        }
+            #dataTable3 td.body.dataTable_서명 .big {/*서명 첫 글자 & 위 아래 동일 글자 강조*/
+                color: brown;
+                font-size:20px;
+            }
+        .dataTable td.body.dataTable_서명, .dataTable td.body.dataTable_저자, .dataTable td.body.dataTable_발행자 {
+            text-align:left;
+            padding-left:5px;
+        }
+    .dataTable td.body.seperatorBlack {/*검정 구분선*/
+        border-top:3px black solid;
+    }
+    .dataTable td.body.seperatorRed {/*빨강 구분선*/
+        border-top:3px red solid;
+    }
+    .dataTable td.body.notDeletable {/*진행 중, 삭제 예정 지정 불가*/
+        pointer-events: none;
+
+        background:#B0B0B0;
+        opacity:0.8;
+    }
+    /*4단계 전용*/
+    #dataTable4 td.body {
+        font-weight:normal;
+    }
+    #dataTable4 th, #dataTable4 td {
+        white-space: nowrap;
+    }
+    #dataTable4 td.body.dataTable_가격, #dataTable4 td.body.dataTable_면장수 {
+        background:skyblue;
+    }
+    /*5단계, 6단계 전용*/
+    #dataTable5 td.body {/*5단계, 6단계 전용*/
+        font-weight:normal;
+    }
+    #dataTable5 th, #dataTable5 td {
+        white-space: nowrap;
+    }
+    #dataTable5 td.body.dataTable_ISBN {
+        background:rgb(255,217,102);
+    }
+    #dataTable5 td.body.dataTable_서명 {
+        background:#FFFF8F;
+    }
+    #dataTable5 td.body.dataTable_발행년 {
+        background:#C2F6C2 ;
+    }
+    #dataTable5 td.body.dataTable_가격 {
+        background:#C5EDE5 ;
+    }
+    /*테이블 내 데이터 삭제 전용*/
+    .dataTable tr.willDelete, .dataTable tr.reject {/*삭제 예정 배경*/
+        background:#FFC000;
+    }
+    .dataTable tr:hover {/*삭제 예정 지정 상호작용*/
+        background:#fadd00;
+        cursor:pointer;
+    }
+
+/*ISBN 중복 없음 표시*/
+#noSameISBN {
+    display:block;
+    margin-top:10px;
+    margin-left:10px;
+
+    font-size:20px;
+    font-weight: bold;
+}
