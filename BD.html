@@ -20,9 +20,9 @@
             <div class="pageDescription">
                 비치희망신청 엑셀, 동네서점바로대출 엑셀 자료를 업로드 합니다. (해당 파일들을 각각 또는 동시에 드래그해서 이 페이지로 집어넣기)
                 <br>
-                • <b class="green">비치희망신청</b> : <u>모든 '신청중' 자료</u> / <b class="green">동네서점바로대출</b> : <u>현재 진행중인 모든 자료 포함</u> (신청 ~ 반납 / 입고된 자료는 필요 없음)
+                • <b class="green">비치희망신청</b> : <u>모든 '신청중' 자료</u> / <b class="green">동네서점바로대출</b> : <u>현재 진행 중인 모든 자료 포함</u> (신청 ~ 반납 / 입고된 자료는 필요 없음)
                 <br>
-                • 업로드가 완료되었으면 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
+                • 업로드가 완료되었으면, 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
             </div>
             <div id="pageBody1" class="pageBody">
                 <p>비치희망신청 엑셀</p>
@@ -48,9 +48,9 @@
             <div class="pageDescription">
                 비치희망신청 & 동네서점바로대출 도서 중 <b>ISBN</b>이 동일한 자료를 확인합니다.
                 <br>
-                • 신청 사항을 확인한 후, 구입 대상에서 제외할 경우 자료를 표에서 클릭하여 <b class="red">삭제 예정</b>으로 지정합니다. (해당 자료를 실제 관리자 페이지 별도로 취소 처리도 해주세요)
+                • 신청 사항을 확인한 후, 구입 대상에서 제외할 경우 자료를 표에서 클릭하여 <b class="red">삭제 예정</b>으로 지정합니다. (해당 자료를 실제 관리자 페이지에서 별도로 취소 처리도 해주세요)
                 <br>
-                • 삭제 예정 지정이 완료되었으면 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
+                • 삭제 예정 지정이 완료되었으면, 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
             </div>
             <div id="pageBody2" class="pageBody">
                 <table id="dataTable2" class="dataTable" class="hidden"></table>
@@ -71,9 +71,9 @@
             <div class="pageDescription">
                 비치희망신청 & 동네서점바로대출 도서 중 <b>서명</b>이 동일한 자료를 확인합니다. (서명 기준으로 자료를 정렬하였으며, <b class="brown">위아래 자료에 동일한 문구가 있으면 강조표시됩니다.</b>)
                 <br>
-                • 신청 사항을 확인한 후, 구입 대상에서 제외할 경우 자료를 클릭하여 <b class="red">삭제 예정</b>으로 지정합니다. (신청 페이지에 들어가 따로 취소처리하세요)
+                • 신청 사항을 확인한 후, 구입 대상에서 제외할 경우 자료를 클릭하여 <b class="red">삭제 예정</b>으로 지정합니다. (신청 페이지에 들어가 따로 취소 처리를 하세요)
                 <br>
-                • 삭제 예정 지정이 완료되었으면 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
+                • 삭제 예정 지정이 완료되었으면, 우측 상단의 <b class="blue">다음 단계</b>를 누르세요.
             </div>
             <div id="pageBody3" class="pageBody">
                 <table id="dataTable3" class="dataTable" class="hidden"></table>
@@ -108,19 +108,14 @@
             <div id="pageBody6" class="pageBody">
                 <p>반입용 엑셀 (소장자료 복본 확인용)</p>
                 <button id="writeExcelImport" class="writeExcel button-4" role="button">엑셀 다운로드</button>
-                <br class="clearFloat">
                 <p>검토용 엑셀 (구입여부 최종 검토)</p>
                 <button id="writeExcelConsider" class="writeExcel button-4" role="button">엑셀 다운로드</button>
-                <hr class="clearFloat">
-                <p>알라딘, K.LAS 일괄 검색 (ISBN 기준, K.LAS는 사전에 로그인이 되어 있어야 함)</p>
-                <p style="font-size:14px;">* 알라딘 검색결과가 없을 경우, 해당 페이지를 새로고침(F5)하세요.</p>
-                <button id="searchAladinUp" class="searchAladin button-1" role="button">알라딘 검색<br><span class="desc">(목록 위에서 아래로)</span></button>
-                <button id="searchKlasUp" class="searchKlas button-2" role="button">K.LAS 전 도서관 검색<br><span class="desc">(목록 위에서 아래로)</span></button>
-                <br class="clearFloat">
-                <button id="searchAladinDown" class="searchAladin button-1" role="button">알라딘 검색<br><span class="desc">(목록 아래에서 위로)</span></button>
-                <button id="searchKlasDown" class="searchKlas button-2" role="button">K.LAS 전 도서관 검색<br><span class="desc">(목록 아래에서 위로)</span></button>
-                <br class="clearFloat">
-                <p>알라딘, K.LAS 검색 제외 체크 (반입용 엑셀로 복본 조사 후, 복본에 해당하는 도서를 제외하세요)</p>
+                <hr>
+                <p>알라딘 검색결과 일괄 열기 (ISBN 기준 - 검색결과가 없으면 창을 새로고침[F5]하세요)</p>
+                <button id="searchAladinUp" class="searchAladin button-1" role="button">알라딘 검색 - 목록 위에서 아래로 ↓</button>
+                <br>
+                <button id="searchAladinDown" class="searchAladin button-1" role="button">알라딘 검색 - 목록 아래에서 위로 ↑</button>
+                <p>알라딘 검색 제외 도서 체크 (반입용 엑셀로 복본 조사 후, 복본에 해당하는 도서를 제외하세요)</p>
                 <div id="pageBody6_data">
                     <table id="dataTable6" class="dataTable" class="hidden"></table>
                 </div>
