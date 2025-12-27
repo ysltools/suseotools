@@ -73,6 +73,18 @@ const ignoreStateList = [//각 단계별로 제외하는 상태
 //엑셀 업로드 제어
 let allowInput = true
 
+//K.LAS 검색 도서관 목록 및 검색 출력 숫자(display)
+const searchLibraryList = "MA,MB,ME,MC,MD,MH,MJ"
+    //MA : 중앙도서관
+    //MB : 웅상도서관
+    //ME : 서창도서관
+    //MC : 영어도서관
+    //MD : 상북도서관
+    //MH : 윤현진도서관
+    //MJ : 삼산도서관
+//K.LAS 검색 출력 숫자
+const searchLibraryDisplay = 100
+
 
 //=============================
 // 1. 파일 업로드
@@ -300,28 +312,20 @@ $("#exchangeBD").onclick = () => {
 //다음 단계 버튼
 $("#goNext1").onclick = () => {
     //파일 업로드 여부 체크
-    if (dataObj.step1.B.data === undefined && dataObj.step1.D.data !== undefined) {
-        if (!confirm("※ 비치희망신청 엑셀이 업로드되지 않았습니다.\n비치희망신청 건수를 0건으로 간주합니다.\n\n이대로 진행하겠습니까?")) {
-          return
-        }
-    } else if (dataObj.step1.B.data !== undefined && dataObj.step1.D.data === undefined) {
-        if (!confirm("※ 동네서점바로대출 엑셀이 업로드되지 않았습니다.\n동네서점바로대출 건수를 0건으로 간주합니다.\n\n이대로 진행하겠습니까?")) {
-          return
-        }
-    } else if (dataObj.step1.B.data === undefined && dataObj.step1.D.data === undefined) {
-        alert("※ 오류 : 업로드된 엑셀 파일이 없습니다.")
-        return
+    if (dataObj.step1.B.data === undefined || dataObj.step1.D.data === undefined) {
+        let noExcel = ""
+        if (dataObj.step1.B.data === undefined) noExcel += "\n* 비치희망신청 엑셀"
+        if (dataObj.step1.D.data === undefined) noExcel += "\n* 동네서점바로대출 엑셀"
+        if (!confirm("※ 업로드가 되지 않은 엑셀이 있습니다." + noExcel + "\n\n해당 건은 [신청 0건]으로 진행하겠습니까?")) return
+        if (dataObj.step1.B.data === undefined) dataObj.step1.B.data = []
+        if (dataObj.step1.D.data === undefined) dataObj.step1.D.data = []
     }
     //파일 헤더 체크
     if (dataObj.step1.B.noHeader !== undefined && dataObj.step1.B.noHeader > 0) {
-        if (!confirm("※ 비치희망신청 엑셀에 없는 정보가 있습니다.\n(업로드 칸 상단 주황색 표시)\n\n그래도 진행하겠습니까?")) {
-          return
-        }
+        if (!confirm("※ 비치희망신청 엑셀에 없는 정보가 있습니다.\n(업로드 칸 상단 주황색 표시)\n\n그래도 진행하겠습니까?")) return
     }
     if (dataObj.step1.D.noHeader !== undefined && dataObj.step1.D.noHeader > 0) {
-        if (!confirm("※ 동네서점바로대출 엑셀에 없는 정보가 있습니다.\n(업로드 칸 상단 주황색 표시)\n그래도 진행하겠습니까?")) {
-          return
-        }
+        if (!confirm("※ 동네서점바로대출 엑셀에 없는 정보가 있습니다.\n(업로드 칸 상단 주황색 표시)\n그래도 진행하겠습니까?")) return
     }
 
     //엑셀 업로드 막기, dropeZone 변경
@@ -346,9 +350,7 @@ let mergeAndCheckISBN = (goUp) => {
     dataObj.step4 = {}
 
     //단일 엑셀 정보 만들기
-    let tempArr = []
-      if (dataObj.step1.B.data !== undefined) tempArr.push(dataObj.step1.B.data)
-      if (dataObj.step1.D.data !== undefined) tempArr.push(dataObj.step1.D.data)
+    let tempArr = [dataObj.step1.B.data, dataObj.step1.D.data]
     let num = 1
     tempArr.forEach((data,i) => {
         data.forEach((uploadR,j) => {
@@ -660,6 +662,10 @@ $("#goNext3").onclick = () => {
 
     //엑셀 출력 전 2차 필터링
     secondFilter()
+
+    //버튼 체크 표시 제거
+    $("#writeExcelImport").classList.remove("downloaded")
+    $("#writeExcelConsider").classList.remove("downloaded")
 }
 //=============================
 // 4. 반입 & 검토 시작
@@ -749,6 +755,7 @@ let excelForImport = () => {
 
     //엑셀 출력 버튼 세팅
     $("#writeExcelImport").onclick = () => {
+        //엑셀 출력
         writeExcel($("#dataTable4"),"반입용 엑셀" + todayText + ".xlsx",
             {colWidth://열 너비
                 [
@@ -790,6 +797,8 @@ let excelForImport = () => {
                 [5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28,29,30,31,32]
             }
         )
+        //버튼에 체크 표시
+        $("#writeExcelImport").classList.add("downloaded")
     }
 
     //검토용 엑셀 생성
@@ -898,6 +907,7 @@ let excelForDetermine = () => {
     
     //엑셀 출력 버튼 세팅
     $("#writeExcelConsider").onclick = () => {
+        //엑셀 출력
         writeExcel($("#dataTable5"),"검토용 엑셀" + todayText + ".xlsx",
             {colWidth://열 너비
                 [
@@ -916,6 +926,8 @@ let excelForDetermine = () => {
                 ]
             }
         )
+        //버튼에 체크 표시
+        $("#writeExcelConsider").classList.add("downloaded")
     }
 
     //알라딘 검색 창 열기
@@ -938,6 +950,32 @@ let excelForDetermine = () => {
     $("#searchAladinDown").onclick = async () => {
         for(let i = dataObj.step4.length - 1;i>= 0;i--) {
             openAladin(dataObj.step4[i])
+        }
+    }
+
+    //K.LAS 검색 창 열기
+    let openKlas = async (book) => {
+        //검색 제외 대상일 경우 패스
+        if (dataObj.step4.reject.indexOf(book["번호"]) >= 0) return
+        //0.01초 단위로 창 열기 (순차적으로 열어야 창이 생성됨)
+        let link = "https://kdot.yangsan.go.kr/sklas/BookSearch/BookNomalSearch/MA?search_txt=" + book.ISBN
+        + "&pageno=1&display=" + searchLibraryDisplay + "&manage_code=" + searchLibraryList
+        + "&libgroupVal=undefined&book_type=BOOK&input_search_text=" + book.ISBN
+        + "&serial_pageno=1&serial_display=10&isTopSearch=true&search_type=TOTAL&check_all_manage_code=false"
+        window.open(link, "_blank")
+        await sleep(10)
+    }
+
+    //K.LAS 일괄검색 버튼
+    $("#searchKlasUp").onclick = async () => {
+        for(let i = 0;i<dataObj.step4.length;i++) {
+            openKlas(dataObj.step4[i])
+        }
+    }
+    
+    $("#searchKlasDown").onclick = async () => {
+        for(let i = dataObj.step4.length - 1;i>= 0;i--) {
+            openKlas(dataObj.step4[i])
         }
     }
 }
