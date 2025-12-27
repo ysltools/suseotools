@@ -20,6 +20,11 @@ let checkFirstLineHeader = (input) => {
     }
 }
 
+//함수 : 숫자 여부 파악
+function isNumber(value) {
+  return typeof value === 'string' && !isNaN(value) && !isNaN(parseFloat(value));
+}
+
 //엑셀 입력 분석
 let parseExcel = (input) => {
     let wb = XLSX.read(input.binary, {type: 'binary'})
@@ -106,10 +111,20 @@ let writeExcel = (tableDOM, outputName, opt) => {
             colData = {}//셀 초기화
             let cellStyle = window.getComputedStyle(cell)
             if (cell.innerHTML.length > 0) {
-                colData.v = cell.innerHTML.replaceAll("<hr>","\n").replaceAll("<br>","\n")
-                colData.t = "s"
+                if (cell.dataset.type === "number") {//"number" type은 숫자로 저장
+                  colData.v = cell.innerHTML
+                  colData.t = "n"
+                } else if (cell.dataset.type === "currency") {//"currency" type은 콤마 형식의 숫자로 저장
+                  colData.v = cell.innerHTML
+                  colData.t = "n"
+                  colData.z = "0,000"
+                } else {
+                  colData.v = cell.innerHTML.replaceAll("<hr>","\n").replaceAll("<br>","\n")
+                  colData.t = "s"
+                }
             } else {
-                colData.t = "z"
+                colData.v = ""
+                colData.t = "s"
             }
             colData.s = {}
             //정렬 및 줄바꿈
@@ -156,6 +171,7 @@ let writeExcel = (tableDOM, outputName, opt) => {
                     }
                 })
                 //공란일 경우 : 주변 셀 테두리 부여
+                /*
                 if (colData.t === "z") {
                     //첫 행이 아닐 경우 : "상단 행 동일 열의 셀" 하단 테두리 활성화 (해당 셀이 공란이 아닐 시)
                     if (sheetArr.length > 0 && sheetArr[sheetArr.length - 1][j] !== undefined && sheetArr[sheetArr.length - 1][j].t !== "z") {
@@ -180,6 +196,7 @@ let writeExcel = (tableDOM, outputName, opt) => {
                         }
                     }
                 }
+                */
             rowArr.push(colData)//셀 입력
         })
         sheetArr.push(rowArr)//행 입력
